@@ -1,0 +1,38 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Stefan
+ * Date: 20/12/2015
+ * Time: 20:33
+ */
+
+
+/**
+ * @param $variables
+ * Afhankelijk van geen of wel inhoud in de zijblokken, content breedte aanpassen
+ * variablele worden op page.html.twig gebruikt
+ * contentlayout - sidebarfirst - sidebarsecond
+ */
+function illutek8_preprocess_page(&$variables) {
+    //dit niet meer gebruiken, zie onenote voor het waarom
+// als er in beide sidebars content is
+    if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
+        $variables['contentlayout'] = 'col-md-5 col-md-push-4';
+        $variables['sidebarfirst'] = 'col-md-4 col-md-pull-5';
+        $variables['sidebarsecond'] = 'col-md-3';
+    }
+// als er enkel in de sidebar first content is
+    elseif (!empty($variables['page']['sidebar_first'])) {
+        $variables['contentlayout'] = 'col-md-8 col-md-push-4';
+        $variables['sidebarfirst'] = 'col-md-4 col-md-pull-8';
+    }
+// als er enkel content is in de rechter sidebar
+    elseif (!empty($variables['page']['sidebar_second'])) {
+        $variables['contentlayout'] = 'col-md-8';
+        $variables['sidebarsecond'] = 'col-md-4';
+    }
+// geen enkel content in beide zijbalken
+    else {
+        $variables['contentlayout'] = 'col-md-12';
+    }
+}
