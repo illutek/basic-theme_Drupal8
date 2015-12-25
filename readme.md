@@ -35,7 +35,7 @@ dit vanuit de map templates, op deze manier lukt het niet.
 dit lukt wel de file waar deze code zitwoont in templates/layout/page.html.twig
 
 ##page.html.twig
-###Voorwardelijke opmaak
+###Voorwaardelijke opmaak
 Sidebar-first in HTML na de main-content, willen dit wel voor de main-content tonen en de
 main-content breedte col-sm-... aanpassen afhankelijk van ja of nee first- en second-sidebar,
 dit alles op de page.html.twig en niet op yoursite.theme (vroegere yoursite.php file)
@@ -73,6 +73,12 @@ dit alles op de page.html.twig en niet op yoursite.theme (vroegere yoursite.php 
                 {% endblock %}
         {% endif %}
 ```
+Het waarom nu op de twig pagina's en niet meer op de yoursite.theme (bij Drupal7 template.php file, 
+wat ook in orde is, zie de code op illutek8.theme.
+Voor de uitleg
+https://www.drupal.org/node/2329901
+https://www.drupal.org/node/2315471
+
 
 
                 
