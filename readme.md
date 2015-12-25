@@ -24,12 +24,55 @@ Ook dit eens bekijken ivm menu systeem
 http://drupal.stackexchange.com/questions/141347/alter-menu-item-markup-in-drupal-8
 
 ##Includes
-´´´
+```
 {% include  '/partials/header.html.twig' %} 
 ´´´
 dit vanuit de map templates, op deze manier lukt het niet.
 
-´´´
+```
 {% include directory ~ '/templates/partials/header.html.twig' %} 
 ´´´
 dit lukt wel de file waar deze code zitwoont in templates/layout/page.html.twig
+
+##page.html.twig
+###Voorwardelijke opmaak
+Sidebar-first in HTML na de main-content, willen dit wel voor de main-content tonen en de
+main-content breedte col-sm-... aanpassen afhankelijk van ja of nee first- en second-sidebar,
+dit alles op de page.html.twig en niet op yoursite.theme (vroegere yoursite.php file)
+```
+{# Content #}
+        {% set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-sm-6 col-sm-push-3',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-sm-9 col-sm-push-3',
+        page.sidebar_first is empty and page.sidebar_second ? 'col-sm-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12'
+        ] %}
+
+        <section{{ content_attributes.addClass(content_classes) }}>
+            {# the content #}
+        </section>
+        
+        {# Sidebar First #}
+                {% set first_classes = [
+                page.sidebar_first and page.sidebar_second ? 'col-sm-3 col-sm-pull-6',
+                page.sidebar_first and page.sidebar_second is empty ? 'col-sm-3 col-sm-pull-9'
+                ] %}
+                {% if page.sidebar_first %}
+                    {% block sidebar_first %}
+                        <aside {{ attributes.addClass(first_classes) }} role="complementary">
+                            {{ page.sidebar_first }}
+                        </aside>
+                    {% endblock %}
+                {% endif %}
+        
+                {# Sidebar Second #}
+                {% if page.sidebar_second %}
+                    {% block sidebar_second %}
+                        <aside class="col-sm-3" role="complementary">
+                            {{ page.sidebar_second }}
+                        </aside>
+                    {% endblock %}
+                {% endif %}
+                ´´´
+                
+
