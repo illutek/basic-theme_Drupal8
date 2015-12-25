@@ -1,0 +1,89 @@
+<div class="layout-container">
+    {# Header #}
+    {% include directory ~ '/templates/partials/header.html.twig' %}
+
+    {# Navigation #}
+    <!-- op een one page theme vervang de nav region door een include naar
+    partials/nav_onepage.html.twig -->
+    {# include directory ~ '/templates/partials/nav_onepage.html.twig' #}
+    {% include directory ~ '/templates/partials/nav.html.twig' %}
+
+    {{ page.help }}
+
+    <main class="container" role="main">
+        <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+
+        {# Content #}
+        {% set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-sm-6 col-sm-push-3',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-sm-9 col-sm-push-3',
+        page.sidebar_first is empty and page.sidebar_second ? 'col-sm-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12'
+        ] %}
+
+        <section{{ content_attributes.addClass(content_classes) }}>
+
+            {# Highlighted #}
+            {% if page.highlighted %}
+                {% block highlighted %}
+                    <div class="highlighted">{{ page.highlighted }}</div>
+                {% endblock %}
+            {% endif %}
+
+            {# Breadcrumbs #}
+            {% if breadcrumb %}
+                {% block breadcrumb %}
+                    {{ breadcrumb }}
+                {% endblock %}
+            {% endif %}
+
+            {# Action Links #}
+            {% if action_links %}
+                {% block action_links %}
+                    <ul class="action-links">{{ action_links }}</ul>
+                {% endblock %}
+            {% endif %}
+
+            {# Help #}
+            {% if page.help %}
+                {% block help %}
+                    {{ page.help }}
+                {% endblock %}
+            {% endif %}
+
+            {# Content #}
+            {% block content %}
+                <a id="main-content"></a>
+                {{ page.content }}
+            {% endblock %}
+        </section>
+
+        {# Sidebar First #}
+        {% set first_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-sm-3 col-sm-pull-6',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-sm-3 col-sm-pull-9'
+        ] %}
+        {% if page.sidebar_first %}
+            {% block sidebar_first %}
+                <aside {{ attributes.addClass(first_classes) }} role="complementary">
+                    {{ page.sidebar_first }}
+                </aside>
+            {% endblock %}
+        {% endif %}
+
+        {# Sidebar Second #}
+        {% if page.sidebar_second %}
+            {% block sidebar_second %}
+                <aside class="col-sm-3" role="complementary">
+                    {{ page.sidebar_second }}
+                </aside>
+            {% endblock %}
+        {% endif %}
+
+
+    </main>
+
+    {# Footer #}
+    {% include directory ~ '/templates/partials/footer.html.twig' %}
+
+</div>{# /.layout-container #}

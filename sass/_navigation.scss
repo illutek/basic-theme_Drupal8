@@ -1,0 +1,31 @@
+@import "variables";
+// ++ Nagivation
+.navbar {
+  li{
+    float: left;
+    position: relative;
+  }
+  ul ul {
+    position: absolute;
+    width: 200px;
+    background: #f8f8f8;
+    margin-left: 25px;
+    display: none;
+    li{
+      float:none;
+      z-index: 999;
+      a{
+        color: $bleu;
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid #efefef;
+
+        &:hover{
+          background: $bleu;
+          color:#fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
