@@ -75,9 +75,9 @@ dit alles op de page.html.twig en niet op yoursite.theme (vroegere yoursite.php 
 ```
 Het waarom nu op de twig pagina's en niet meer op de yoursite.theme (bij Drupal7 template.php file, 
 wat ook in orde is, zie de code op illutek8.theme.
-Voor de uitleg
-https://www.drupal.org/node/2329901
-https://www.drupal.org/node/2315471
+Voor de uitleg<br />
+https://www.drupal.org/node/2329901  
+https://www.drupal.org/node/2315471  
 
 
 
